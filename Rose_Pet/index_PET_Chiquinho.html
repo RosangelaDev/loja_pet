@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja Pet</title>
+ 
+    <link rel="stylesheet" href="sytle.css">
+
+</head>
+
+<body>
+    <section>
+    <h1>Pet Chiquinho</h1>
+
+    <label for="proprietario">Nome do proprietário</label> 
+    <input type="text" id="proprietario">
+    <div id="erro"></div>
+    <br>
+    <label for="pet">Nome do Pet:</label> 
+    <input type="text" id="pet">
+    <div id="erro1"></div>
+
+    <h2>Serviços</h2>
+    
+    <h3> Banho</h3>
+    <img src="imag/banhoPet.jpg" style="height: 260px;"/>
+    <br><br>
+    <label>Banho = (R$120)</label>
+    <input type="checkbox" id="Banho" class="servico">
+    <br><br>
+        
+    <h3> Tosa</h3>
+    <img src="imag/tosaPet.jpg"style="height: 210px;"/> 
+    <br><br>
+    <label>Tosa = (R$150)</label>
+    <input type="checkbox" id="Tosa" class="servico">
+    <br><br>     
+    <h3>Veterinário</h3>
+    <img src="imag/Veterinario.jpg" style="height: 250px; "/>
+    <br><br>
+    <label>Veterinário = (R$300)</label> 
+    <input type="checkbox" id="Veterinario" class="servico"> 
+    
+    <br><br> 
+
+    <div id="d1"></div>
+    
+    <button onclick="enviar()">Enviar</button> 
+
+    <br><br>
+
+    <footer>
+        <p> &copy; Pet Chiquinho</p>
+    </footer>
+   
+   </section>
+
+<script>
+    function enviar() 
+    {
+        var proprietario = document.getElementById("proprietario").value;
+        var pet = document.getElementById("pet").value;
+
+        if (proprietario == "" || pet == "") 
+        {
+            document.getElementById("erro").innerHTML = "Campo obrigatório";
+            document.getElementById("erro").style.color = "red"; 
+            document.getElementById("erro1").innerHTML = "Campo obrigatório";
+            document.getElementById("erro1").style.color = "red"; 
+        }
+        else
+        {
+            var precos = [120, 150, 300];
+            var total = 0;
+            var servicos = document.getElementsByClassName("servico");
+            var servicosRealizados = false;
+
+            for(var x = 0; x < servicos.length; x++)
+            {
+                if(servicos[x].checked)
+                {
+                    total += precos[x];
+                    servicosRealizados = true;
+                }
+            }
+            
+            if(!servicosRealizados) {
+                document.getElementById("d1").innerHTML = "";
+                document.getElementById("erro").innerHTML = "Selecione pelo menos um serviço";
+                document.getElementById("erro").style.color = "red"; 
+            } else {
+               document.getElementById("d1").innerHTML = "<strong>Valor a pagar : R$" + total + "</strong>";
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
+
